@@ -21,6 +21,7 @@ var connection = mysql.createConnection({
       bamazonManager();
   })
 
+  //************* Main bamazon function *******************/
   function bamazonManager(){
       inquirer.prompt([
           {
@@ -56,6 +57,8 @@ var connection = mysql.createConnection({
                 break;
           }
         })
+
+        //*************** ProductSale function to display over all sale ****************/
         function productSale(){
             var productQuery = "SELECT * FROM products";
             connection.query(productQuery, function(err, res){
@@ -73,6 +76,7 @@ var connection = mysql.createConnection({
             })
         }
 
+        //*********** lowInventory function to display any product whose stock is less than 5 ************/
         function lowInventory(){
             var lowInv = "SELECT * FROM products WHERE stock_quantity < 6"
             connection.query(lowInv, function(err, res){
@@ -87,6 +91,7 @@ var connection = mysql.createConnection({
             })
         }
 
+        //*********** Function to add stock quantity to the inventory **************/
         function addInventory(){
             inquirer.prompt([
                 {
@@ -152,6 +157,7 @@ var connection = mysql.createConnection({
             })
         }
 
+        //************ Function to add a new product to the databse ******************/
         function newProduct(){
             inquirer.prompt([
                 {
@@ -180,6 +186,7 @@ var connection = mysql.createConnection({
             })
         }
 
+        //************ new product function  *******************/
         function addNewProduct(result){
             var newQuery = "INSERT INTO products (product_name,department_name,price,stock_quantity) VALUES ('"+
             result.newProd+"','"+result.prodDepartment+"','"+result.prodPrice+"','"+result.prodQuantity+"')";
@@ -192,6 +199,7 @@ var connection = mysql.createConnection({
             })
         }
 
+        //*********** Function to show the table every time the database is updated */
         function showTable(){
             var productQuery = "SELECT * FROM products";
             connection.query(productQuery, function(err, res){
